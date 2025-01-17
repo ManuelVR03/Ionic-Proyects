@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      La Liga
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div *ngIf="!modificado">
+    <div *ngIf="!creando">
+      <ion-list>
+        <ion-item *ngFor="let partido of partidos" (click)="modificar(partido)">
+          {{partido.equipoLocal}} - {{partido.puntosLocal}}<br />
+          {{partido.equipoVisitante}} - {{partido.puntosVisitante}}
+        </ion-item>
+      </ion-list>
+      <ion-button color="primary" expand="block" (click)="crearPartido()">CREAR PARTIDO</ion-button>
+    </div>
+  </div>
+  <div *ngIf="creando">
+    <h2>Crear Partido</h2>
+    <ion-list>
+      <ion-item>
+        <ion-select label="Equipo Local" value="local" justify="start" [(ngModel)]="equipoLocal">
+          <ion-select-option value="{{equipo}}" *ngFor="let equipo of equipos">{{equipo}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-select label="Equipo Visitante" value="visitante" justify="start" [(ngModel)]="equipoVisitante">
+          <ion-select-option value="{{equipo}}" *ngFor="let equipo of equipos">{{equipo}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+    <ion-button color="primary" expand="block" (click)="alertPartido()">AÑADIR PARTIDO</ion-button>
+    <ion-button color="danger" expand="block" (click)="cancelar()">CANCELAR</ion-button>
+
+  </div>
+</ion-content>
